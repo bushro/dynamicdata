@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    hikari:
+      master:
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        jdbc-url: jdbc:mysql://localhost/master?useSSL=false&serverTimezone=UTC
+        username: root
+        password: 671354
+        filters: stat,wall,log4j2
+        maxActive: 50
+        initialSize: 5
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+      slave:
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        jdbc-url: jdbc:mysql://localhost/slave?useSSL=false&serverTimezone=UTC
+        username: root
+        password: 671354
+        filters: stat,wall,log4j2
+        maxActive: 10
+        initialSize: 5
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.bushro.pojo
+#pagehelper分页插件
+pagehelper:
+  helperDialect: oracle
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
